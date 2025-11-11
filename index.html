@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notes - Prototipo Google Keep Mejorado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Smart Notes</h1>
+            <p class="subtitle">Categorización automática inteligente</p>
+        </header>
+
+        <!-- Sección de creación de notas -->
+        <section class="note-creator">
+            <h2>Crear Nueva Nota</h2>
+            <div class="creator-form">
+                <input 
+                    type="text" 
+                    id="noteTitle" 
+                    placeholder="Título de la nota" 
+                    aria-label="Título de la nota"
+                >
+                <textarea 
+                    id="noteContent" 
+                    placeholder="Escribe tu nota aquí..." 
+                    aria-label="Contenido de la nota"
+                    rows="4"
+                ></textarea>
+
+                <!-- Sugerencias automáticas -->
+                <div class="suggestions" id="suggestions">
+                    <div class="suggestion-group">
+                        <label>Color sugerido:</label>
+                        <div class="color-preview" id="colorPreview">
+                            <span class="color-dot" id="suggestedColorDot"></span>
+                            <span id="suggestedColorText">Gris (por defecto)</span>
+                        </div>
+                        <button 
+                            type="button" 
+                            id="changeColorBtn" 
+                            class="btn-small"
+                            aria-label="Cambiar color"
+                        >
+                            Cambiar color
+                        </button>
+                    </div>
+
+                    <!-- Selector de colores (oculto inicialmente) -->
+                    <div class="color-picker hidden" id="colorPicker">
+                        <button type="button" class="color-option" data-color="red" aria-label="Color rojo">
+                            <span class="color-dot red"></span> Rojo (Tareas)
+                        </button>
+                        <button type="button" class="color-option" data-color="blue" aria-label="Color azul">
+                            <span class="color-dot blue"></span> Azul (Ideas)
+                        </button>
+                        <button type="button" class="color-option" data-color="green" aria-label="Color verde">
+                            <span class="color-dot green"></span> Verde (Compras)
+                        </button>
+                        <button type="button" class="color-option" data-color="gray" aria-label="Color gris">
+                            <span class="color-dot gray"></span> Gris (General)
+                        </button>
+                    </div>
+
+                    <div class="suggestion-group">
+                        <label>Etiquetas sugeridas:</label>
+                        <div class="tags-preview" id="tagsPreview">
+                            <span class="tag">General</span>
+                        </div>
+                    </div>
+
+                    <!-- Agregar etiqueta manual -->
+                    <div class="suggestion-group">
+                        <label>Agregar etiqueta manual:</label>
+                        <div class="manual-tag-input">
+                            <input 
+                                type="text" 
+                                id="manualTagInput" 
+                                placeholder="Nueva etiqueta"
+                                aria-label="Agregar etiqueta manualmente"
+                            >
+                            <button 
+                                type="button" 
+                                id="addManualTagBtn" 
+                                class="btn-small"
+                                aria-label="Agregar etiqueta"
+                            >
+                                + Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button 
+                    type="button" 
+                    id="saveNoteBtn" 
+                    class="btn-primary"
+                    aria-label="Guardar nota"
+                >
+                    💾 Guardar Nota
+                </button>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters">
+            <h2>Filtrar Notas</h2>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label>Por Color:</label>
+                    <div class="color-filters">
+                        <button class="filter-btn active" data-filter-color="all" aria-label="Mostrar todas">
+                            Todas
+                        </button>
+                        <button class="filter-btn" data-filter-color="red" aria-label="Filtrar rojas">
+                            <span class="color-dot red"></span>
+                        </button>
+                        <button class="filter-btn" data-filter-color="blue" aria-label="Filtrar azules">
+                            <span class="color-dot blue"></span>
+                        </button>
+                        <button class="filter-btn" data-filter-color="green" aria-label="Filtrar verdes">
+                            <span class="color-dot green"></span>
+                        </button>
+                        <button class="filter-btn" data-filter-color="gray" aria-label="Filtrar grises">
+                            <span class="color-dot gray"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="tagFilter">Por Etiqueta:</label>
+                    <select id="tagFilter" aria-label="Filtrar por etiqueta">
+                        <option value="all">Todas las etiquetas</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="searchInput">Buscar:</label>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Buscar en notas..."
+                        aria-label="Buscar notas"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de notas -->
+        <section class="notes-list">
+            <h2>Mis Notas (<span id="notesCount">0</span>)</h2>
+            <div id="notesList" class="notes-grid">
+                <p class="empty-state">No hay notas todavía. ¡Crea tu primera nota arriba! 📝</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
